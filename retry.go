@@ -8,10 +8,14 @@ import (
 
 // RetryConfig controls exponential-backoff retry during startup connect only.
 type RetryConfig struct {
-	MaxAttempts  int
+	// MaxAttempts is the total number of attempts (including the first).
+	MaxAttempts int
+	// InitialDelay is the first backoff pause.
 	InitialDelay time.Duration
-	MaxDelay     time.Duration
-	Multiplier   float64
+	// MaxDelay caps exponential backoff.
+	MaxDelay time.Duration
+	// Multiplier scales delay after each failed attempt.
+	Multiplier float64
 }
 
 type retryManager struct {

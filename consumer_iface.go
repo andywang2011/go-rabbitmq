@@ -16,7 +16,9 @@ type Consumer interface {
 
 // ConsumerHandle adds lifecycle helpers without changing the Consumer interface.
 type ConsumerHandle interface {
+	// Close stops consumption and releases resources.
 	Close() error
+	// NotifyClose returns a channel of connection errors when supported by the underlying consumer.
 	NotifyClose() <-chan *amqp.Error
 }
 

@@ -10,19 +10,29 @@ import (
 
 // Config holds RabbitMQ connection settings.
 type Config struct {
-	URL      string
-	URLs     []string
-	Host     string
-	Port     int
-	User     string
+	// URL is a full amqp:// connection string (highest precedence).
+	URL string
+	// URLs is a failover list of amqp:// connection strings.
+	URLs []string
+	// Host is the broker hostname when URL is empty.
+	Host string
+	// Port is the broker port (default 5672).
+	Port int
+	// User is the login name (default guest).
+	User string
+	// Password is the login password (default guest).
 	Password string
-	Vhost    string
-	Timeout  time.Duration
-	// Heartbeat and DialTimeout map to amqp.Config when AMQPConfig is nil.
-	Heartbeat   time.Duration
+	// Vhost is the virtual host path.
+	Vhost string
+	// Timeout bounds overall connect operations.
+	Timeout time.Duration
+	// Heartbeat is the AMQP heartbeat interval when AMQPConfig is nil.
+	Heartbeat time.Duration
+	// DialTimeout bounds the TCP dial when AMQPConfig is nil.
 	DialTimeout time.Duration
 	// PrefetchCount is applied via Channel.Qos before consume (default 1).
-	PrefetchCount  int
+	PrefetchCount int
+	// PrefetchGlobal sets the global Qos flag when applying PrefetchCount.
 	PrefetchGlobal bool
 	// Retry optional startup connect retry (dial + channel open only).
 	Retry RetryConfig
