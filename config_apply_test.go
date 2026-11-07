@@ -26,7 +26,8 @@ func Test_applyAMQPConfig_override(t *testing.T) {
 }
 
 func Test_applyAMQPConfig_timeoutFallback(t *testing.T) {
-	c := applyAMQPConfig(nil, Config{Timeout: time.Second}) //nolint:staticcheck // nil ctx is tolerated
+	//lint:ignore SA1012 intentional nil context in test
+	c := applyAMQPConfig(nil, Config{Timeout: time.Second})
 	if c.Dial == nil {
 		t.Fatal("Config.Timeout must configure the dialer")
 	}

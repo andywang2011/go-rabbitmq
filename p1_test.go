@@ -99,7 +99,8 @@ func TestNew_nilCtxTolerated(t *testing.T) {
 		}
 		return &Conn{}, nil
 	}
-	if _, err := NewConn(nil, Config{URL: "amqp://x"}); err != nil { //nolint:staticcheck
+	//lint:ignore SA1012 intentional nil context in test
+	if _, err := NewConn(nil, Config{URL: "amqp://x"}); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -240,7 +241,8 @@ func TestRetry_ctxCancelDuringOp(t *testing.T) {
 
 func TestRetry_nilCtxAndZeroSleep(t *testing.T) {
 	rm := newRetryManager(DefaultRetryConfig())
-	if err := rm.execute(nil, func(context.Context) error { return nil }); err != nil { //nolint:staticcheck
+	//lint:ignore SA1012 intentional nil context in test
+	if err := rm.execute(nil, func(context.Context) error { return nil }); err != nil {
 		t.Fatal(err)
 	}
 	if err := rm.sleep(context.Background(), 0); err != nil {
