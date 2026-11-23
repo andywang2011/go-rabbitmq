@@ -3,7 +3,7 @@ module github.com/andywang2011/go-rabbitmq
 go 1.27.3
 
 require (
-	github.com/rabbitmq/amqp091-go v1.16.0
+	github.com/rabbitmq/amqp091-go v1.17.0
 	go.uber.org/goleak v1.3.0
 )
 
